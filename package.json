@@ -1,0 +1,20 @@
+{
+  "name": "n8n-workflow-advisor",
+  "version": "1.0.0",
+  "description": "Slack agent that returns ready-to-import n8n workflow JSONs on demand",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@slack/bolt": "^4.7.3",
+    "dotenv": "^16.0.0",
+    "zod": "^3.23.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

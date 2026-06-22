@@ -1,0 +1,37 @@
+display_information:
+  name: n8n Workflow Advisor
+  description: Get ready-to-import n8n automation workflows instantly. Just describe what you need to automate.
+  background_color: "#1a1a2e"
+  long_description: "The n8n Workflow Advisor gives your team instant access to 33 industry-specific automation workflow templates. Just mention the bot or use /n8nflow and describe your automation need -- the agent uses Claude AI to identify the best matching workflow and returns a ready-to-import JSON file with step-by-step setup instructions. Covers agencies, bookkeeping, e-commerce, healthcare, legal, real estate, restaurants, and more."
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: n8n Advisor
+    always_online: true
+  slash_commands:
+    - command: /n8nflow
+      description: Get an n8n workflow for your use case
+      usage_hint: "[describe what you need to automate]"
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read
+      - chat:write
+      - commands
+      - im:history
+      - im:read
+      - im:write
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+      - message.im
+  interactivity:
+    is_enabled: true
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false

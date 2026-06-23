@@ -134,6 +134,52 @@ app.message(async ({ message, say }) => {
   await handleWorkflowRequest(message.text, ({ text: t, blocks, unfurl_links }) => say({ text: t, blocks, unfurl_links }), say);
 });
 
+// App Home tab
+app.event('app_home_opened', async ({ event, client }) => {
+  const topPacks = PACKS.slice(0, 8);
+  await client.views.publish({
+    user_id: event.user,
+    view: {
+      type: 'home',
+      blocks: [
+        {
+          type: 'header',
+          text: { type: 'plain_text', text: 'n8n Workflow Advisor', emoji: true },
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '*Get a ready-to-import n8n workflow for any business need.*\n\nJust describe what you want to automate and I\'ll return the right workflow JSON with setup instructions.',
+          },
+        },
+        { type: 'divider' },
+        {
+          type: 'section',
+          text: { type: 'mrkdwn', text: '*How to use:*' },
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '• Mention me in any channel: `@n8n Advisor I need a booking workflow for my restaurant`\n• Use the slash command: `/n8nflow customer onboarding automation`\n• Send me a direct message with your automation need',
+          },
+        },
+        { type: 'divider' },
+        {
+          type: 'section',
+          text: { type: 'mrkdwn', text: `*33 industry packs available:*\n${topPacks.map(p => `• ${p.name}`).join('\n')}\n_...and ${PACKS.length - topPacks.length} more_` },
+        },
+        { type: 'divider' },
+        {
+          type: 'context',
+          elements: [{ type: 'mrkdwn', text: 'Powered by Claude AI + MCP | Built for Slack Agent Builder Hackathon 2026' }],
+        },
+      ],
+    },
+  });
+});
+
 (async () => {
   await app.start();
   console.log('n8n Workflow Advisor is running');

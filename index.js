@@ -47,8 +47,9 @@ If no pack fits, respond: {"pack_id": null, "confidence": "none", "reason": "<ex
   });
 
   try {
-    const text = message.content[0].text.trim();
-    return JSON.parse(text);
+    const raw = message.content[0].text.trim();
+    const jsonStr = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+    return JSON.parse(jsonStr);
   } catch {
     return { pack_id: null, confidence: 'none', reason: 'Could not parse response' };
   }
